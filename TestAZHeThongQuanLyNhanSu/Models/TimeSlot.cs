@@ -7,7 +7,7 @@
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        // Quan hệ với WorkingHours
+    
         public ICollection<WorkingHours> WorkingHours { get; set; } = new List<WorkingHours>();
     }
 

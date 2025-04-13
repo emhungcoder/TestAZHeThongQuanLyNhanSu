@@ -15,7 +15,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             _context = context;
         }
 
-        // Hiển thị form tạo mới ca làm việc
+      
         public async Task<IActionResult> Create()
         {
             ViewData["EmployeeId"] = new SelectList(await _context.Employees.ToListAsync(), "Id", "FullName");
@@ -23,7 +23,6 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return View();
         }
 
-        // Xử lý tạo mới ca làm việc
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WorkingHours workingHours)
@@ -42,13 +41,13 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
                 }
             }
 
-            // Đảm bảo dữ liệu chọn được cho dropdown khi form không hợp lệ
+      
             ViewData["EmployeeId"] = new SelectList(await _context.Employees.ToListAsync(), "Id", "FullName", workingHours.EmployeeId);
             ViewData["TimeSlotId"] = new SelectList(await _context.TimeSlots.ToListAsync(), "Id", "Name", workingHours.TimeSlotId);
             return View(workingHours);
         }
 
-        // Hiển thị form chỉnh sửa ca làm việc
+     
         public async Task<IActionResult> Edit(int id)
         {
             var workingHours = await _context.WorkingHours.FindAsync(id);
@@ -62,7 +61,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return View(workingHours);
         }
 
-        // Xử lý chỉnh sửa ca làm việc
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, WorkingHours workingHours)
@@ -93,18 +92,18 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
                 }
             }
 
-            // Đảm bảo dữ liệu chọn được cho dropdown khi form không hợp lệ
+          
             ViewData["EmployeeId"] = new SelectList(await _context.Employees.ToListAsync(), "Id", "FullName", workingHours.EmployeeId);
             ViewData["TimeSlotId"] = new SelectList(await _context.TimeSlots.ToListAsync(), "Id", "Name", workingHours.TimeSlotId);
             return View(workingHours);
         }
 
-        // Hiển thị danh sách các ca làm việc
+       
         public async Task<IActionResult> Index()
         {
             var workingHours = await _context.WorkingHours
-                .Include(w => w.Employee)  // Bao gồm thông tin nhân viên
-                .Include(w => w.TimeSlot)  // Bao gồm thông tin ca làm việc
+                .Include(w => w.Employee)  
+                .Include(w => w.TimeSlot)  
                 .ToListAsync();
             return View(workingHours);
         }

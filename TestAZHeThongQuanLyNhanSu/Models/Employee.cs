@@ -14,7 +14,7 @@ namespace TestAZHeThongQuanLyNhanSu.Models
         public int PositionId { get; set; }
         public Position? Position { get; set; }
 
-        // Thêm thuộc tính cho lương cơ bản và phụ cấp
+      
         public decimal BasicSalary { get; set; }
         public decimal Allowance { get; set; }
 

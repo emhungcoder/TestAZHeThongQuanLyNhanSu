@@ -9,7 +9,7 @@ namespace TestAZHeThongQuanLyNhanSu.Data
 
         public static async Task SeedAsync(UserManager<Employee> userManager, RoleManager<IdentityRole> roleManager, AppDbContext context)
         {
-            // Tạo các Role nếu chưa tồn tại
+            
             string[] roles = { "Admin", "Employee" };
 
             foreach (var role in roles)
@@ -18,7 +18,7 @@ namespace TestAZHeThongQuanLyNhanSu.Data
                     await roleManager.CreateAsync(new IdentityRole(role));
             }
 
-            // Kiểm tra nếu bảng Positions chưa có dữ liệu
+           
             if (!context.Positions.Any())
             {
                 context.Positions.AddRange(
@@ -28,21 +28,19 @@ namespace TestAZHeThongQuanLyNhanSu.Data
                 await context.SaveChangesAsync();
             }
 
-            // Kiểm tra xem tài khoản Admin đã tồn tại chưa
+          
             if (await userManager.FindByNameAsync("admin") == null)
             {
-                // Lấy PositionId cho Admin (ở đây tôi giả sử bạn muốn dùng Position "Manager")
                 var position = context.Positions.FirstOrDefault(p => p.Name == "Manager");
 
                 if (position == null)
                 {
-                    // Nếu không có Position "Manager" (có thể không có dữ liệu trong bảng Positions)
+                    
                     position = new Position { Name = "Manager" };
                     context.Positions.Add(position);
                     await context.SaveChangesAsync();
                 }
 
-                // Tạo tài khoản Admin
                 var admin = new Employee
                 {
                     UserName = "admin",
@@ -53,7 +51,7 @@ namespace TestAZHeThongQuanLyNhanSu.Data
                     DateOfBirth = new DateTime(1990, 1, 1),
                     StartDate = DateTime.Now,
                     PhoneNumber = "0123456789",
-                    PositionId = position.Id, // Gán PositionId đã lấy
+                    PositionId = position.Id, 
                     IsActive = true,
                     EmailConfirmed = true
                 };
@@ -67,13 +65,12 @@ namespace TestAZHeThongQuanLyNhanSu.Data
 
                 if (position == null)
                 {
-                    // Nếu không có Position "Staff", tạo mới
+                
                     position = new Position { Name = "Staff" };
                     context.Positions.Add(position);
                     await context.SaveChangesAsync();
                 }
 
-                // Tạo tài khoản nhân viên
                 var employee = new Employee
                 {
                     UserName = "employee1",
@@ -84,7 +81,7 @@ namespace TestAZHeThongQuanLyNhanSu.Data
                     DateOfBirth = new DateTime(1995, 5, 15),
                     StartDate = DateTime.Now,
                     PhoneNumber = "0123456790",
-                    PositionId = position.Id, // Gán PositionId đã lấy
+                    PositionId = position.Id, 
                     IsActive = true,
                     EmailConfirmed = true
                 };

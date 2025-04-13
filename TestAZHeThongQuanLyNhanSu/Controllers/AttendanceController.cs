@@ -6,7 +6,7 @@ using TestAZHeThongQuanLyNhanSu.Models;
 
 namespace TestAZHeThongQuanLyNhanSu.Controllers
 {
-    [Authorize] // Yêu cầu đăng nhập
+    [Authorize] 
     public class AttendanceController : Controller
     {
         private readonly AppDbContext _context;
@@ -16,13 +16,12 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             _context = context;
         }
 
-        // Giao diện chấm công
+       
         public IActionResult Clock()
         {
             return View();
         }
 
-        // Chấm công vào
         [HttpPost]
         public async Task<IActionResult> ClockIn()
         {
@@ -57,7 +56,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return RedirectToAction("Clock");
         }
 
-        // Chấm công ra
+     
         [HttpPost]
         public async Task<IActionResult> ClockOut()
         {
@@ -91,8 +90,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return RedirectToAction("Clock");
         }
 
-        // Danh sách chấm công
-  
+    
         public async Task<IActionResult> Index()
         {
             var attendances = await _context.Attendances.Include(a => a.Employee).ToListAsync();

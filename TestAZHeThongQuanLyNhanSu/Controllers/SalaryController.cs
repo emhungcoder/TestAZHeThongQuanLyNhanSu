@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestAZHeThongQuanLyNhanSu.Data;
-using TestAZHeThongQuanLyNhanSu.Enums;
 using TestAZHeThongQuanLyNhanSu.Models;
 using TestAZHeThongQuanLyNhanSu.ViewModels;
 

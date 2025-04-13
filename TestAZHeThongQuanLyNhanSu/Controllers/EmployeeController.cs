@@ -18,21 +18,19 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             _context = context;
         }
 
-        // Danh sách nhân viên
         public async Task<IActionResult> Index()
         {
             var employees = await _userManager.Users.Include(e => e.Position).ToListAsync();
             return View(employees);
         }
 
-        // GET: Tạo mới
         public async Task<IActionResult> Create()
         {
             ViewBag.Positions = await _context.Positions.ToListAsync();
             return View();
         }
 
-        // POST: Tạo mới
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string userName, string fullName, string password, DateTime dateOfBirth, string gender, string address, DateTime startDate, int positionId)
@@ -78,7 +76,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return View();
         }
 
-        // GET: Chỉnh sửa
+
         public async Task<IActionResult> Edit(string id)
         {
             var employee = await _userManager.Users.FirstOrDefaultAsync(e => e.Id == id);
@@ -99,7 +97,6 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return View(model);
         }
 
-        // POST: Chỉnh sửa
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditEmployeeViewModel model)
@@ -155,7 +152,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Xóa nhân viên
+
         public async Task<IActionResult> Delete(string id)
         {
             var employee = await _userManager.Users.Include(e => e.Position).FirstOrDefaultAsync(e => e.Id == id);
@@ -164,7 +161,7 @@ namespace TestAZHeThongQuanLyNhanSu.Controllers
             return View(employee);
         }
 
-        // POST: Xác nhận xóa
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
