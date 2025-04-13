@@ -1,0 +1,24 @@
+﻿@model TestAZHeThongQuanLyNhanSu.Models.Position
+
+<h2>Cập nhật chức vụ</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label>Tên chức vụ</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Lương cơ bản</label>
+        <input asp-for="BasicSalary" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Phụ cấp</label>
+        <input asp-for="Allowance" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Cập nhật</button>
+</form>

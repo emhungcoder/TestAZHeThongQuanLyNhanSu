@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TestAZHeThongQuanLyNhanSu.Models.Employee>
+@{
+    ViewData["Title"] = "Danh sách nhân viên";
+}
+
+<h2>Nhân sự</h2>
+<a asp-action="Create" class="btn btn-primary mb-2">+ Thêm nhân viên</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Tên đăng nhập</th>
+            <th>Họ tên</th>
+            <th>Ngày sinh</th>
+            <th>Giới tính</th>
+            <th>Địa chỉ</th>
+            <th>Ngày bắt đầu</th>
+            <th>Chức vụ</th>
+            <th>Lương cơ bản</th>
+            <th>Phụ cấp</th>
+            <th>Trạng thái</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.UserName</td>
+                <td>@e.FullName</td>
+                <td>@e.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                <td>@e.Gender</td>
+                <td>@e.Address</td>
+                <td>@e.StartDate.ToString("dd/MM/yyyy")</td>
+                <td>@e.Position?.Name</td>
+                <td>@String.Format("{0:N0}", e.Position?.BasicSalary)</td>
+                <td>@String.Format("{0:N0}", e.Position?.Allowance)</td>
+                <td>@(e.IsActive ? "Đang làm việc" : "Đã nghỉ việc")</td>
+                <td>
+                 
+                    <a asp-action="Delete" asp-route-id="@e.Id" class="btn btn-danger btn-sm">Xóa</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

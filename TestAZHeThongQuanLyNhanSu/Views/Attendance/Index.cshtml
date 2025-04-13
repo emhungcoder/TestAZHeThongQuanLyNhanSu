@@ -1,0 +1,39 @@
+﻿@model List<TestAZHeThongQuanLyNhanSu.Models.Attendance>
+
+@{
+    ViewData["Title"] = "Danh sách chấm công";
+}
+
+<h2 class="mt-4">Danh sách chấm công</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<table class="table table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nhân viên</th>
+            <th>Thời gian vào</th>
+            <th>Thời gian ra</th>
+            <th>Số giờ làm</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var duration = item.ClockOutTime.HasValue ? (item.ClockOutTime.Value - item.ClockInTime).TotalHours : (double?)null;
+            <tr>
+                <td>@item.Employee.FullName</td>
+                <td>@item.ClockInTime.ToString("HH:mm dd/MM/yyyy")</td>
+                <td>@(item.ClockOutTime?.ToString("HH:mm dd/MM/yyyy") ?? "Đang làm")</td>
+                <td>@(duration.HasValue ? $"{duration:F2} giờ" : "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>

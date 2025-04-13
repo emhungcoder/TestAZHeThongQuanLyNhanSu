@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TestAZHeThongQuanLyNhanSu.Models.TimeSlot>
+
+@{
+    ViewData["Title"] = "Danh Sách Ca Làm";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Thêm Mới Ca Làm</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên Ca</th>
+            <th>Giờ Bắt Đầu</th>
+            <th>Giờ Kết Thúc</th>
+            <th>Hành Động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var timeSlot in Model)
+        {
+            <tr>
+                <td>@timeSlot.Name</td>
+                <td>@timeSlot.StartTime.ToString(@"hh\:mm")</td>
+                <td>@timeSlot.EndTime.ToString(@"hh\:mm")</td>
+                <td>
+                    <a href="@Url.Action("Delete", new { id = timeSlot.Id })" class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
